@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration - International Conference 2024</title>
+    <link rel="stylesheet" href="register.css">
+    <style>
+        /* Toast notification styles */
+        .toast {
+            visibility: hidden;
+            min-width: 250px;
+            margin-left: -125px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 2px;
+            padding: 16px;
+            position: fixed;
+            z-index: 1;
+            left: 50%;
+            bottom: 30px;
+            font-size: 17px;
+        }
+        
+        .toast.show {
+            visibility: visible;
+            animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        }
+
+        @keyframes fadein {
+            from {bottom: 0; opacity: 0;} 
+            to {bottom: 30px; opacity: 1;}
+        }
+
+        @keyframes fadeout {
+            from {bottom: 30px; opacity: 1;} 
+            to {bottom: 0; opacity: 0;}
+        }
+    </style>
+</head>
+<body>
+    <div class="background-overlay">
+        <header>
+            <h1>Register for International Conference 2024</h1>
+        </header>
+        <main>
+            <form id="registrationForm" action="submit_registration.php" method="post" onsubmit="showToast(event)">
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="age">Age:</label>
+                    <input type="number" id="age" name="age" required>
+                </div>
+                <div class="form-group">
+                    <label for="number">Contact Number:</label>
+                    <input type="tel" id="number" name="number" required pattern="[0-9]{10}" title="Please enter a 10-digit mobile number.">
+                </div>
+                <div class="form-group">
+                    <label for="date">Select Date:</label>
+                    <input type="date" id="date" name="date" required min="2024-10-07" max="2024-10-09">
+                </div>
+                <div class="section-selection">
+                    <label for="section">Select Section:</label>
+                    <select id="section" name="section" required>
+                        <option value="section1">CS- AIML</option>
+                        <option value="section2">CS- AIDS</option>
+                        <option value="section3">AIML</option>
+                        <option value="section4">AIDS</option>
+                    </select>
+                </div>
+                <button type="submit" class="submit-btn">Submit Registration</button>
+            </form>
+            <div id="toast" class="toast">Registration successfully completed!</div>
+        </main>
+        <footer>
+            <p>&copy; 2024 International Conference. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        function showToast(event) {
+            event.preventDefault(); // Prevent the form from submitting immediately
+
+            const toast = document.getElementById('toast');
+            toast.classList.add('show');
+
+            // Show the toast for 3 seconds, then redirect
+            setTimeout(() => {
+                toast.classList.remove('show'); // Hide toast
+                // Redirect to index.html
+                window.location.href = 'index.html'; 
+            }, 3000); // Adjust the timeout as needed
+        }
+    </script>
+</body>
+</html>
